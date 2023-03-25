@@ -16,11 +16,7 @@ html, body {
     padding: 2vw;
   }
   #end {
-    width: 150px;
-    height: 80px;
-    border-radius: 20px;
-    padding: 15px 18px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    margin-top: 30px;
+    position: relative;
+    bottom:0;
   }
