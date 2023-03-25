@@ -3,7 +3,6 @@ html, body {
   background: rgb(230, 204, 237);
   font-family: monospace;
   font-size: 20px;
-  margin: 30px auto;
   }
   
   #forma {
@@ -18,6 +17,9 @@ html, body {
     padding: 2vw;
   }
   #end {
+    width: 150px;
+    height: 80px;
+    border-radius: 20px;
     padding: 15px 18px;
     text-align: center;
     text-decoration: none;
