@@ -8,6 +8,7 @@
   <title>3</title>
 </head>
 <body>
+  <div class="col col-10 col-md-6" id="forma">
         <form id="form" action="" method="POST">
             <div class="group">
                 <label for="name">Имя:</label>
@@ -62,5 +63,6 @@
                 C контрактом ознакомлен(а) </label><br>
             <input type="submit" id="end" value="Отправить">
         </form>
+  </div>
 </body> 
 </html>
