@@ -11,14 +11,14 @@
   <div class="col col-10 col-md-6" id="forma">
         <form id="form" action="" method="POST">
             <div class="group">
-                <label for="name">Имя:</label>
-                <input name="fio" id="name" class="form-control" placeholder="Введите ваше имя">
+                <label for="name">Имя:
+                <input name="fio" id="name" class="form-control" placeholder="Введите ваше имя"></label>
             </div>
             <div class="group">
-                <label for="email">E-mail:</label>
+                <label for="email">E-mail:
 
                 <input name="email" type="email" id="email" class="form-control" placeholder="Введите вашу почту">
-
+                </label>
             </div>
             <div class="group">
 
@@ -46,18 +46,18 @@
 
             </div>
             <div class="group">
-                <label for="powers">Сверхспособности:</label>
+                <label for="powers">Сверхспособности:
                 <select class="form-control" name="abilities[]" id="powers" multiple="multiple">
                     <option value="1">Бессмертие</option>
                     <option value="2">Прохождение сквозь стены</option>
                     <option value="3">Левитация</option>
-                </select>
+                </select></label>
             </div>
 
 
             <div class="group">
-                <label for="bio">Биография:</label>
-                <textarea name="bio" id="bio" rows="3" class="form-control"></textarea>
+                <label for="bio">Биография:
+                <textarea name="bio" id="bio" rows="3" class="form-control"></textarea></label>
             </div>
             <label><input type="checkbox" id="checkbox" value="1" name="checkbox">
                 C контрактом ознакомлен(а) </label><br>
