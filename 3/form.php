@@ -20,7 +20,7 @@
                 <input name="email" type="email" id="email" placeholder="Введите вашу почту">
 
             </div>
-            <div class="form-group">
+            <div class="group">
 
                 Дата рождения:
                 <input name="date" type="date" value="<?php echo date('Y-m-d'); ?>" />
