@@ -20,9 +20,17 @@ html, body {
   .group{
     padding-bottom: 10px;
   }
-#end {
-  padding: 15px 18px;
-  text-align: center;
+
+  #end{
+    margin-top: 30px;
+    position: relative;
+    bottom:0;
+  }
+
+  #closebutton{
+  float: right;
+  }
+
+  a:link {
   text-decoration: none;
-  display: inline-block;
-}
+  }
