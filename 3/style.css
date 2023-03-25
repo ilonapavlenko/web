@@ -6,8 +6,7 @@ html, body {
   }
   
   #forma {
-    top: 50%;
-    left: 50%;
+    margin: 30px 400px 30px 400px;
     background-color: white;
     border: 1px solid;
     padding: 1vw;
