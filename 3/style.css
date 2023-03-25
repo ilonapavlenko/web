@@ -6,11 +6,15 @@ html, body {
   margin: 30px auto;
   }
   
-  #form{
+ #forma{
 	
     margin: 30px auto;
     background-color: white;
     border: 2px solid;
+  }
+  #form{
+    padding: 2vw;
+    padding-bottom: 0;
   }
 
   .group{
