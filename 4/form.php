@@ -10,49 +10,59 @@
 </head>
 <body>
   <div class="col col-10 col-md-6" id="forma">
+    <?php
+  if (!empty($messages)) {
+    print('<div id="messages">');
+  // Выводим все сообщения.
+    foreach ($messages as $message) {
+      print($message);
+  }
+  print('</div>');
+}
+    ?>
         <form id="form" action="" method="POST">
             <div class="group">
                 <label for="name">Имя:
-                <input name="fio" id="name" class="form-control" placeholder="Введите ваше имя"></label>
+                <input name="fio" id="name" class="form-control <?php if ($errors['fio']) {print 'error';} ?>" placeholder="Введите ваше имя" value="<?php print $values['fio']; ?>" ></label>
             </div>
             <div class="group">
                 <label for="email">E-mail:
-                <input name="email" type="email" id="email" class="form-control" placeholder="Введите вашу почту">
+                <input name="email" type="email" id="email" class="form-control <?php if ($errors['email']) {print 'error';} ?>" placeholder="Введите вашу почту" value="<?php print $values['email']; ?>">
                 </label>
             </div>
             <div class="group">
                 Дата рождения:
-                <input name="date" type="date" class="form-control" value="" />
+                <input name="date" type="date" class="form-control <?php if ($errors['date']) {print 'error';} ?>" value="<?php print $values['date']; ?>" />
             </div>
             <div class="group">
                 Пол:
-                <label for="g1"><input type="radio" class="form-check-input" name="sex" id="g1" value="1">
+                <label for="g1"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex" id="g1" value="1" <?php if ($values['sex']=='1') {print 'checked';} ?>>
                     Мужской</label>
-                <label for="g2"><input type="radio" class="form-check-input" name="sex" id="g2" value="2">
+                <label for="g2"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex" id="g2" value="2" <?php if ($values['sex']=='2') {print 'checked';} ?>>
                     Женский</label>
             </div>
             <div class="group">
                 Количество конечностей:
-                <label for="l1"><input type="radio" class="form-check-input" name="limbs" id="l1" value="1">
+                <label for="l1"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs" id="l1" value="1" <?php if ($values['limbs']=='1') {print 'checked';} ?>>
                     1</label>
-                    <label for="l2"><input type="radio" class="form-check-input" name="limbs" id="l2" value="2">
+                <label for="l2"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs" id="l2" value="2" <?php if ($values['limbs']=='2') {print 'checked';} ?>>
                     2</label>
-                <label for="l3"><input type="radio" class="form-check-input" name="limbs" id="l3" value="3">
+                <label for="l3"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs" id="l3" value="3" <?php if ($values['limbs']=='3') {print 'checked';} ?>>
                     3</label>
-                <label for="l4"><input type="radio" class="form-check-input" name="limbs" id="l4" value="4">
+                <label for="l4"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs" id="l4" value="4" <?php if ($values['limbs']=='4') {print 'checked';} ?>>
                     4</label>
             </div>
             <div class="group">
                 <label for="powers">Сверхспособности:
-                <select class="form-control" name="abilities[]" id="powers" multiple="multiple">
-                    <option value="1">Бессмертие</option>
-                    <option value="2">Прохождение сквозь стены</option>
-                    <option value="3">Левитация</option>
+                <select class="form-control <?php if ($errors['abilities']) {print 'error';} ?>" name="abilities[]" id="powers" multiple="multiple">
+                    <option value="1" <?php if (!empty($values['abilities'][0])) {if ($values['abilities][0]=='1') {print 'checked';}} ?>>Бессмертие</option>
+                    <option value="2" <?php if (!empty($values['abilities'][1])) {if ($values['abilities][1]=='2') {print 'checked';}} ?>>Прохождение сквозь стены</option>
+                    <option value="3" <?php if (!empty($values['abilities'][2])) {if ($values['abilities][2]=='3') {print 'checked';}} ?>>Левитация</option>
                 </select></label>
             </div>
             <div class="group">
                 <label for="bio">Биография:
-                <textarea name="bio" id="bio" rows="3" class="form-control"></textarea></label>
+                <textarea name="bio" id="bio" rows="3" class="form-control <?php if ($errors['limbs']) {print 'error';} ?>"></textarea></label>
             </div>
             <label><input type="checkbox" id="checkbox" value="1" name="checkbox">
                 C контрактом ознакомлен(а) </label><br>
