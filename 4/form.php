@@ -62,9 +62,9 @@
             </div>
             <div class="group">
                 <label for="bio">Биография:
-                <textarea name="bio" id="bio" rows="3" class="form-control <?php if ($errors['limbs']) {print 'error';} ?>"></textarea></label>
+                <textarea name="bio" id="bio" rows="3" class="form-control <?php if ($errors['bio']) {print 'error';} ?>"><?php print $values['bio']; ?></textarea></label>
             </div>
-            <label><input type="checkbox" id="checkbox" value="1" name="checkbox">
+            <label><input type="checkbox" class="form-check-input <?php if ($errors['checkbox']) {print 'error';} ?>" id="checkbox" value="1" name="checkbox" <?php if ($values['checkbox']=='1') {print 'checked';} ?>>
                 C контрактом ознакомлен(а) </label><br>
             <input type="submit" id="end" class="btn btn-primary" value="Отправить">
         </form>
