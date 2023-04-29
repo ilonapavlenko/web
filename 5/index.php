@@ -269,5 +269,5 @@ catch(PDOException $e){
   setcookie('save', '1');
 
   // Делаем перенаправление.
-  header('Location: index.php');
+  header('Location: ./');
 }
