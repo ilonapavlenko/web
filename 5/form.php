@@ -36,9 +36,9 @@
             </div>
             <div class="group">
                 Пол:
-                <label for="g1"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex" id="g1" value="1" <?php if ($values['sex']=='1') {print 'checked';} ?>>
+                <label for="g1"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex" id="g1" value="m" <?php if ($values['sex']=='m') {print 'checked';} ?>>
                     Мужской</label>
-                <label for="g2"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex" id="g2" value="2" <?php if ($values['sex']=='2') {print 'checked';} ?>>
+                <label for="g2"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex" id="g2" value="w" <?php if ($values['sex']=='w') {print 'checked';} ?>>
                     Женский</label>
             </div>
             <div class="group">
