@@ -157,6 +157,10 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
+           if( !in_array($_POST['sex'], ['1','2'])){
+        $errors = TRUE;
+        setcookie('sex_error', '1', time() + 24 * 60 * 60);
+    }
     setcookie('sex_value', $_POST['sex'], time() + 30 * 24 * 60 * 60 );
   }
 
