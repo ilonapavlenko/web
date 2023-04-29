@@ -43,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   }
   if ($errors['email']) {
     setcookie('email_error', '', 100000);
-    $messages[] = '<div class="error">Заполните email.</div>';
+    $messages[] = '<div class="error">Заполните email. <br> Должен содержать @ </div>';
   }
   if ($errors['date']) {
     setcookie('date_error', '', 100000);
-    $messages[] = '<div class="error">Заполните дату рождения. <br> Должен содержать @</div>';
+    $messages[] = '<div class="error">Заполните дату рождения.</div>';
   }
   if ($errors['sex']) {
     setcookie('sex_error', '', 100000);
-    $messages[] = '<div class="error">Укажите пол. <br> день/месяц/год </div>';
+    $messages[] = '<div class="error">Укажите пол.</div>' ;
   }
   if ($errors['limbs']) {
     setcookie('limbs_error', '', 100000);
