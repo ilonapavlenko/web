@@ -132,6 +132,10 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
+           if(!preg_match('/^([а-яА-ЯЁёa-zA-Z0-9_,.\s-]+)$/u', $_POST['fio'])){
+        setcookie('fio_error', '1', time() + 24 * 60 * 60);
+        $errors = TRUE;
+    }
     // Сохраняем ранее введенное в форму значение на год.
     setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60 );
   }
@@ -141,6 +145,10 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
+           if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        setcookie('email_error', '1', time() + 24 * 60 * 60);
+      $errors = TRUE;
+    }
     setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60 );
   }
 
@@ -149,6 +157,10 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
+           if(!preg_match('%[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]%', $_POST['date'])){
+        $errors = TRUE;
+        setcookie('date', '1', time() + 24 * 60 * 60);
+    }
     setcookie('date_value', $_POST['date'], time() + 30 * 24 * 60 * 60 );
   }
 
@@ -157,7 +169,7 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
-           if( !in_array($_POST['sex'], ['1','2'])){
+           if( !in_array($_POST['sex'], ['m','w'])){
         $errors = TRUE;
         setcookie('sex_error', '1', time() + 24 * 60 * 60);
     }
@@ -169,6 +181,10 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
+           if(!in_array($_POST['limbs'], [1,2,3,4])){
+        setcookie('limbs_error', '1', time() + 24 * 60 * 60);
+        $errors = TRUE;
+    }
     setcookie('limbs_value', $_POST['limbs'], time() + 30 * 24 * 60 * 60 );
   }
 
@@ -200,6 +216,10 @@ if (empty($_POST['fio'])) {
     $errors = TRUE;
   }
   else {
+           if(!preg_match('/^([а-яА-ЯЁёa-zA-Z0-9_,.\s-]+)$/u', $_POST['bio'])){
+    setcookie('bio_error', '1', time() + 24 * 60 * 60);
+    $errors = TRUE;
+}
     setcookie('checkbox_value', $_POST['checkbox'], time() + 30 * 24 * 60 * 60 );
   }
 
