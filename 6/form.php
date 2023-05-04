@@ -30,7 +30,7 @@
     echo "прохождение сквозь стены: "; echo (empty($steni) ? '0' : $steni) . "</br>";
     echo "левитация: "; echo (empty($levit) ? '0' : $levit) . "</br>";
 ?>
-    <form action="" method="POST">
+    <form id="form" action="" method="POST">
         <table>
             <caption>Данные формы</caption>
             <tr> 
