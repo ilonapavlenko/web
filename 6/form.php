@@ -17,13 +17,13 @@
             }
         }
     echo '</div>';
-    $stmt = $db->prepare("SELECT count(application_id) from abilities where superpower_id = 1;");
+    $stmt = $db->prepare("SELECT count(application_id) from abilities where powers_id = 1;");
     $stmt->execute();
     $god = $stmt->fetchColumn();
-    $stmt = $db->prepare("SELECT count(application_id) from abilities where superpower_id = 2;");
+    $stmt = $db->prepare("SELECT count(application_id) from abilities where powers_id = 2;");
     $stmt->execute();
     $steni = $stmt->fetchColumn();
-    $stmt = $db->prepare("SELECT count(application_id) from abilities where superpower_id = 3;");
+    $stmt = $db->prepare("SELECT count(application_id) from abilities where powers_id = 3;");
     $stmt->execute();
     $levit = $stmt->fetchColumn();
     echo "бессмертие: "; echo (empty($god) ? '0' : $god) . "</br>";
