@@ -1,0 +1,31 @@
+1.	Защита от XSS:
+Используются функции htmlspecialchars и strip_tags при выводе данных в форму. Это помогает предотвратить внедрение HTML- и JavaScript-кода, защищая от XSS-атак.
+Пример:
+$values['name'] = empty($_COOKIE['name_value']) ? '' :         htmlspecialchars(strip_tags($_COOKIE['name_value']));
+if (!empty($dates['name'])) {
+    $values['name'] = htmlspecialchars(strip_tags($dates[0]['name']));
+}
+<input name="name" value="<?php echo $values['name']; ?>"/>
+
+2.	Защита от SQL Injection:
+Используюься подготовленные запросы ($db->prepare и $stmt->execute) для выполнения запросов к базе данных. Это позволяет избежать SQL-инъекций путем корректной обработки параметров запроса.
+Пример:
+
+$stmt = $db->prepare("SELECT application_id FROM users WHERE login = ?");
+$stmt->execute([$login]);
+
+3.	Защита от CSRF:
+Генерируется токен в сессии и проверяете его наличие и соответствие при обработке запросов. Это помогает предотвратить CSRF-атаки, гарантируя, что запросы отправлены только с моего веб-сайта. 
+Код:
+
+$_SESSION['token'] = bin2hex(random_bytes(32));
+
+<?php if (!empty($_SESSION['login'])) {echo '<input type="hidden" name="token" value="' . $_SESSION["token"] . '">'; } ?>
+if (!empty($_POST['token']) && hash_equals($_POST['token'], $_SESSION['token'])) {
+   // сохранение изменённых данных в базу
+} else {
+   die('Ошибка CSRF: недопустимый токен');
+}
+
+4.	Защита от Include и Upload уязвимости.
+Указывается путь к файлу в операторе include вручную. Это помогает предотвратить включение нежелательных файлов.
