@@ -59,9 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         setcookie('bio_error2', '', 100000);
         $messages['bio2'] = '<p class="msg">Недопустимый формат ввода биографии</p>';
     }
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+    $_SESSION['login'] = $validUser;
     include('form.php');
     exit();
 } else {
+    if (!empty($_POST['token']) && hash_equals($_POST['token'], $_SESSION['token'])) {
     foreach ($_POST as $key => $value) {
         if (preg_match('/^clear(\d+)$/', $key, $matches)) {
             $app_id = $matches[1];
@@ -165,4 +168,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
     }
     header('Location: index.php');
+    }
 }
