@@ -48,32 +48,32 @@
                     echo    '<tr>
                             <td style="font-weight: 700;">'; print($value['application_id']); echo '</td>
                             <td>
-                                <input class="input" name="fio'.$value['application_id'].'" value="'; print($value['fio']); echo '">
+                                <input class="input" name="fio'.$value['application_id'].'" value="'; print(htmlspecialchars($value['fio'])); echo '">
                             </td>
                             <td>
-                                <input class="input" name="email'.$value['application_id'].'" value="'; print($value['email']); echo '">
+                                <input class="input" name="email'.$value['application_id'].'" value="'; print(htmlspecialchars($value['email'])); echo '">
                             </td>
                             <td>
                             <input class="input" name="date'.$value['application_id'].'" value="'; print($value['date']); echo '">
                             </td>
                             <td> 
                                 <div class="column-item">
-                                    <input type="radio" id="g1'.$value['application_id'].'" name="sex'.$value['application_id'].'" value="m" '; if ($value['sex'] == 'm') echo 'checked'; echo '>
+                                    <input type="radio" id="g1'.$value['application_id'].'" name="sex'.$value['application_id'].'" value="m" '; if (htmlspecialchars($value['sex']) == 'm') echo 'checked'; echo '>
                                     <label for="g1'.$value['application_id'].'">Мужчина</label>
                                 </div>
                                 <div class="column-item">
-                                    <input type="radio" id="g2'.$value['application_id'].'" name="sex'.$value['application_id'].'" value="w" '; if ($value['sex'] == 'w') echo 'checked'; echo '>
+                                    <input type="radio" id="g2'.$value['application_id'].'" name="sex'.$value['application_id'].'" value="w" '; if (htmlspecialchars($value['sex']) == 'w') echo 'checked'; echo '>
                                     <label for="g2'.$value['application_id'].'">Женщина</label>
                                 </div>
                             </td>
                             <td>
                                 <div class="column-item">
                                 Количество конечностей:
-                                    <input type="radio" id="l1'.$value['application_id'].'" name="limbs'.$value['application_id'].'" value="1" '; if ($value['limbs'] == '1') echo 'checked'; echo '>
+                                    <input type="radio" id="l1'.$value['application_id'].'" name="limbs'.$value['application_id'].'" value="1" '; if (htmlspecialchars($value['limbs'] == '1')) echo 'checked'; echo '>
                                     <label for="l1'.$value['application_id'].'">1</label>
                                 </div>
                                 <div class="column-item">
-                                    <input type="radio" id="l2'.$value['application_id'].'" name="limbs'.$value['application_id'].'" value="left" '; if ($value['limbs'] == '2') echo 'checked'; echo '>
+                                    <input type="radio" id="l2'.$value['application_id'].'" name="limbs'.$value['application_id'].'" value="left" '; if (htmlspecialchars($value['limbs'] == '2')) echo 'checked'; echo '>
                                     <label for="radioLeft'.$value['application_id'].'">2</label>
                                 </div>
                             </td>';
@@ -95,7 +95,7 @@
                                 </div>
                             </td>
                             <td>
-                                <textarea name="bio'.$value['application_id'].'" id="" cols="30" rows="4" maxlength="128">'; print $value['bio']; echo '</textarea>
+                                <textarea name="bio'.$value['application_id'].'" id="" cols="30" rows="4" maxlength="128">'; print (htmlspecialchars($value['bio']); echo '</textarea>
                             </td>
                             <td>
                                 <div class="column-item">
