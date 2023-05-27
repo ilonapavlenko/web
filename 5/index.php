@@ -293,7 +293,7 @@ else {
       session_start() && !empty($_SESSION['login'])) {
 
 
-          $stmt = $db->prepare("UPDATE application2 SET name = ?, email = ?, date = ?,sex = ?, limbs=?, bio = ?, checkbox =?  WHERE user_id = ?");
+          $stmt = $db->prepare("UPDATE application2 SET fio = ?, email = ?, date = ?,sex = ?, limbs=?, bio = ?, checkbox =?  WHERE user_id = ?");
           
           $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $_SESSION['uid']]);
 
@@ -364,7 +364,7 @@ else {
           $stmt = $db->prepare("INSERT INTO user (user, pass) VALUES (?,?)");
           $stmt -> execute([$login, password_hash($pass, PASSWORD_DEFAULT)]);
           $id = $db->lastInsertId();
-            $stmt = $db->prepare("INSERT INTO application2 (name,email,date,sex,limbs,bio,checkbox, user_id) VALUES
+            $stmt = $db->prepare("INSERT INTO application2 (fio,email,date,sex,limbs,bio,checkbox, user_id) VALUES
     (?,?,?,?,?,?,?,?)");
             $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $id]);
             $id = $db->lastInsertId();
