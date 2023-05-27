@@ -9,18 +9,25 @@
     <link rel="stylesheet" href="style5.css">
 </head>
 <body>
-<div class="col col-10 col-md-6" id="forma">
+<body>
+    <div class="col col-10 col-md-11" id="forma">
     <?php
-  if (!empty($messages)) {
-    print('<div id="messages">');
+if (!empty($messages)) {
+  print('<div id="messages">');
   // Выводим все сообщения.
-    foreach ($messages as $message) {
-      print($message);
+  foreach ($messages as $message) {
+    print($message);
   }
+
+
   print('</div>');
 }
-    ?>
-    <?php
+
+// Далее выводим форму отмечая элементы с ошибками классом error
+// и задавая начальные значения элементов ранее сохраненными.
+?>    
+
+<?php
 if (!empty($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
     echo '
         <div class = "login">
@@ -39,7 +46,7 @@ else
     </form>
     </div>
 ';
-    ?>
+?>
         <form id="form" action="" method="POST">
             <div class="group">
                 <label for="name">Имя:
