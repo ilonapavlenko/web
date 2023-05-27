@@ -241,9 +241,13 @@ $errors=err_declare($counter);
                      <label for="g2"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'is-invalid';} ?>" name="sex<?= $counter ?>" id="g2" value="w" <?php if ($res["sex"]=="w") {print 'checked';} ?>>
                     Ж</label></td>
                     
-    <td> <label for="l1"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l1" value="2" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
+    <td> <label for="l1"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l1" value="1" <?php if ($res["limbs"]=="1") {print 'checked';} ?>>
+                    1</label> 
+                    <label for="l2"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l2" value="2" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
                     2</label> 
-                     <label for="l2"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l2" value="4" <?php if ($res["limbs"]=="4") {print 'checked';} ?>>
+                    <label for="l3"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l3" value="3" <?php if ($res["limbs"]=="3") {print 'checked';} ?>>
+                    3</label> 
+                     <label for="l4"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l4" value="4" <?php if ($res["limbs"]=="4") {print 'checked';} ?>>
                     4</label></td>
 <?php     $stmt = $db->prepare("SELECT * FROM app_ability2 where id_app=?");
 $stmt -> execute([$res["id"]]);
