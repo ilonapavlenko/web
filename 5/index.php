@@ -219,7 +219,7 @@ else {
       $errors = TRUE;
   }
   else {
-    if(!in_array($_POST['limbs'], [2,4])){
+    if(!in_array($_POST['limbs'], [1,2,3,4])){
         setcookie('limbs_error', '1', time() + 24 * 60 * 60);
         $errors = TRUE;
     }
