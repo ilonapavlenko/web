@@ -1,4 +1,4 @@
-<<?php
+<?php
 /**
  * Реализовать возможность входа с паролем и логином с использованием
  * сессии для изменения отправленных данных в предыдущей задаче,
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $stmt -> execute([$_SESSION['uid']]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $values['fio'] = empty($result[0]['fio']) ? '' : strip_tags($result[0]['fio']);
+        $values['fio'] = empty($result[0]['name']) ? '' : strip_tags($result[0]['name']);
         $values['email'] = empty($result[0]['email']) ? '' : strip_tags($result[0]['email']);
   $values['date'] = empty($result[0]['date']) ? '' :strip_tags($result[0]['date']);
   $values['sex'] = empty($result[0]['sex']) ? '' : strip_tags($result[0]['sex']);
@@ -112,7 +112,7 @@ else {
     
   // Проверяем ошибки.
     $data = [
-        'fio' => $_POST['fio'],
+        'name' => $_POST['fio'],
         'email' => $_POST['email'],
         'date' => $_POST['date'],
         'sex' => $_POST['sex'],
@@ -148,7 +148,7 @@ else {
           $id_of_app = $result3[0]["id"];
           
           $data = [
-              'fio' => $_POST['fio'],
+              'name' => $_POST['fio'],
               'email' => $_POST['email'],
               'date' => $_POST['date'],
               'sex' => $_POST['sex'],
@@ -180,18 +180,13 @@ else {
           $stmt = $db->prepare("INSERT INTO user (user, pass) VALUES (?,?)");
           $stmt -> execute([$login, password_hash($pass, PASSWORD_DEFAULT)]);
           $id = $db->lastInsertId();
-            $stmt = $db->prepare("INSERT INTO application2 (fio,email,date,sex,limbs,bio,checkbox, user_id) VALUES
+            $stmt = $db->prepare("INSERT INTO application2 (name,email,date,sex,limbs,bio,checkbox, user_id) VALUES
     (?,?,?,?,?,?,?,?)");
             $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $id]);
-            $stmt = $db->prepare("SELECT id FROM ability2");
-            $stmt->execute();
-            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
- 
+            $id = $db->lastInsertId();
             $stmt = $db->prepare("INSERT INTO app_ability2 (id_app, id_ab) VALUES (?,?)");
-            foreach($res as $r){
-                if(isset($_POST['abilities'][$r["id"]-1])){
-                    $stmt->execute([$id, $r["id"]]);
-                }
+            foreach ($_POST['abilities'] as $ability) {
+                $stmt->execute([$id, $ability]);
             }
             
             
