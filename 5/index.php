@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $stmt -> execute([$_SESSION['uid']]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $values['fio'] = empty($result[0]['name']) ? '' : strip_tags($result[0]['name']);
+        $values['fio'] = empty($result[0]['fio']) ? '' : strip_tags($result[0]['fio']);
         $values['email'] = empty($result[0]['email']) ? '' : strip_tags($result[0]['email']);
   $values['date'] = empty($result[0]['date']) ? '' :strip_tags($result[0]['date']);
   $values['sex'] = empty($result[0]['sex']) ? '' : strip_tags($result[0]['sex']);
@@ -293,7 +293,7 @@ else {
       session_start() && !empty($_SESSION['login'])) {
 
 
-          $stmt = $db->prepare("UPDATE application2 SET name = ?, email = ?, date = ?,sex = ?, limbs=?, bio = ?, checkbox =?  WHERE user_id = ?");
+          $stmt = $db->prepare("UPDATE application2 SET fio = ?, email = ?, date = ?,sex = ?, limbs=?, bio = ?, checkbox =?  WHERE user_id = ?");
           
           $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $_SESSION['uid']]);
 
