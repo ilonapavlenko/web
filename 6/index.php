@@ -185,8 +185,8 @@ else {
             $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $id]);
             $id = $db->lastInsertId();
             $stmt = $db->prepare("INSERT INTO app_ability2 (id_app, id_ab) VALUES (?,?)");
-            foreach ($_POST['abilities'] as $ability) {
-                $stmt->execute([$id, $ability]);
+            foreach ($_POST['abilities'] as $ability2) {
+                $stmt->execute([$id, $ability2]);
             }
             
             
