@@ -6,29 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <title>6</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style5.css">
 </head>
 <body>
 <?php
-    echo '<div class="msgbox">'; 
-        if (!empty($messages)) {
-            foreach ($messages as $message) {
-                print($message);
-            }
-        }
-    echo '</div>';
-    $stmt = $db->prepare("SELECT count(application_id) from abilities where powers_id = 1;");
-    $stmt->execute();
-    $god = $stmt->fetchColumn();
-    $stmt = $db->prepare("SELECT count(application_id) from abilities where powers_id = 2;");
-    $stmt->execute();
-    $steni = $stmt->fetchColumn();
-    $stmt = $db->prepare("SELECT count(application_id) from abilities where powers_id = 3;");
-    $stmt->execute();
-    $levit = $stmt->fetchColumn();
-    echo "бессмертие: "; echo (empty($god) ? '0' : $god) . "</br>";
-    echo "прохождение сквозь стены: "; echo (empty($steni) ? '0' : $steni) . "</br>";
-    echo "левитация: "; echo (empty($levit) ? '0' : $levit) . "</br>";
+if (!empty($messages)) {
+  print('<div id="messages">');
+  // Выводим все сообщения.
+  foreach ($messages as $message) {
+    print($message);
+  }
+
+
+  print('</div>');
+}
+
+// Далее выводим форму отмечая элементы с ошибками классом error
+// и задавая начальные значения элементов ранее сохраненными.
+?>    
+
+<?php
+if (!empty($_COOKIE[session_name()]) && !empty($_SESSION['login'])){
+    echo '
+        <div class = "login">
+        <form action="" method="POST" >
+            <input type="hidden" name="logout" value="true">
+            <button type="submit">Выйти</button>
+        </form>
+        </div>
+    ';
+}
+else 
+    echo'
+    <div class = "login">
+    <form action="login.php" target="_blank">
+    <button>Войти</button>
+    </form>
+    </div>
+';
 ?>
     <form id="form" action="" method="POST">
         <table>
