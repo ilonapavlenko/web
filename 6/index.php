@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $stmt -> execute([$_SESSION['uid']]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $values['fio'] = empty($result[0]['name']) ? '' : strip_tags($result[0]['name']);
+        $values['fio'] = empty($result[0]['fio']) ? '' : strip_tags($result[0]['name']);
         $values['email'] = empty($result[0]['email']) ? '' : strip_tags($result[0]['email']);
   $values['date'] = empty($result[0]['date']) ? '' :strip_tags($result[0]['date']);
   $values['sex'] = empty($result[0]['sex']) ? '' : strip_tags($result[0]['sex']);
@@ -112,7 +112,7 @@ else {
     
   // Проверяем ошибки.
     $data = [
-        'name' => $_POST['fio'],
+        'fio' => $_POST['fio'],
         'email' => $_POST['email'],
         'date' => $_POST['date'],
         'sex' => $_POST['sex'],
@@ -148,7 +148,7 @@ else {
           $id_of_app = $result3[0]["id"];
           
           $data = [
-              'name' => $_POST['fio'],
+              'fio' => $_POST['fio'],
               'email' => $_POST['email'],
               'date' => $_POST['date'],
               'sex' => $_POST['sex'],
