@@ -293,7 +293,7 @@ else {
       session_start() && !empty($_SESSION['login'])) {
 
 
-          $stmt = $db->prepare("UPDATE application2 SET fio = ?, email = ?, date = ?,sex = ?, limbs=?, bio = ?, checkbox =?  WHERE user_id = ?");
+          $stmt = $db->prepare("UPDATE application2 SET name = ?, email = ?, date = ?,sex = ?, limbs=?, bio = ?, checkbox =?  WHERE user_id = ?");
           
           $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $_SESSION['uid']]);
 
