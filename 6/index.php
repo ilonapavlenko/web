@@ -159,7 +159,7 @@ else {
           
           $abilities = $_POST['abilities'];
           
-          update_application($db, $id_of_app, $data, $abilities);
+          update_application2($db, $id_of_app, $data, $abilities);
   }
   else {
     // Генерируем уникальный логин и пароль.
