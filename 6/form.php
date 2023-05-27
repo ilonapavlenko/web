@@ -49,8 +49,8 @@ else
 ?>
         <form id="form" action="" method="POST">
             <div class="group">
-                <label for="name">Имя:
-                <input name="fio" id="name" class="form-control <?php if ($errors['fio']) {print 'error';} ?>" placeholder="Введите ваше имя" value="<?php print $values['fio']; ?>" ></label>
+                <label for="fio">Имя:
+                <input name="fio" id="fio" class="form-control <?php if ($errors['fio']) {print 'error';} ?>" placeholder="Введите ваше имя" value="<?php print $values['fio']; ?>" ></label>
             </div>
             <div class="group">
                 <label for="email">E-mail:
