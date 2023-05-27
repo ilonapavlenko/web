@@ -19,3 +19,9 @@ html, body {
     position: relative;
     bottom:0;
   }
+.error {
+  border: 2px solid red;
+}
+#messages{
+	text-align: center;
+}
