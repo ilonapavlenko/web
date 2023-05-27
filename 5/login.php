@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" defer></script>
 </head>
 <body>
-<div class="col col-10 col-md-11" id="forma">
-        <form id="form" action="" method="POST">
+<div class="col col-10 col-md-11" id="form">
+        <form id="forma" action="" method="POST">
             <div class="form-group">
                 <label for="name">Логин</label>
                 <input name="login" id="name" class="form-control" placeholder="Введите ваш логин" ">
