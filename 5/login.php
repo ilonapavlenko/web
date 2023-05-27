@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 <body>
 <div class="col col-10 col-md-11" id="forma">
-        <form id="form1" action="" method="POST">
+        <form id="form" action="" method="POST">
             <div class="form-group">
                 <label for="name">Логин</label>
                 <input name="login" id="name" class="form-control" placeholder="Введите ваш логин" ">
