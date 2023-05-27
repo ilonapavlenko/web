@@ -55,9 +55,9 @@
             <div class="group">
                 <label for="powers">Сверхспособности:
                 <select class="form-control <?php if ($errors['abilities']) {print 'error';} ?>" name="abilities[]" id="powers" multiple="multiple">
-                    <option value="1" <?php if(!empty($values['abilities'][0])) {if ($values['abilities'][0]=='1') {print 'selected';}} ?>>Бессмертие</option>
-                    <option value="2" <?php if(!empty($values['abilities'][1])) {if ($values['abilities'][0]=='2') {print 'selected';}} ?>>Прохождение сквозь стены</option>
-                    <option value="3" <?php if(!empty($values['abilities'][2])) {if ($values['abilities'][0]=='3') {print 'selected';}} ?>>Левитация</option>
+                    <option value="1" <?php if(!empty($values['abilities'][0])) {if ($values['abilities'][0]=='1') {print 'selected';}} ?>>бессмертие</option>
+                    <option value="2" <?php if(!empty($values['abilities'][1])) {if ($values['abilities'][1]=='2') {print 'selected';}} ?>>прохождение сквозь стены</option>
+                    <option value="3" <?php if(!empty($values['abilities'][2])) {if ($values['abilities'][2]=='3') {print 'selected';}} ?>>левитация</option>
                 </select></label>
             </div>
             <div class="group">
