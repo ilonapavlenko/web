@@ -1,7 +1,7 @@
 <?php
 
 
-include('auth.php');
+include('megamodule.php');
 if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])){
 $stmt = $db->prepare("SELECT * FROM admin
       where user=?");
