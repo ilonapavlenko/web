@@ -233,7 +233,7 @@ $errors=err_declare($counter);
   <tr>
     <td><?= $res["id"] ?></td>
     <input name="id[]" class="form-control form-control-sm" value="<?= strip_tags($res["id"]) ?>" type="hidden">
-    <td><input name="fio[]" class="form-control form-control-sm <?php if ($errors['fio']) {print 'is-invalid';} ?>" placeholder="Введите имя" value="<?= strip_tags($res["name"])  ?>"></td>
+    <td><input name="fio[]" class="form-control form-control-sm <?php if ($errors['fio']) {print 'is-invalid';} ?>" placeholder="Введите имя" value="<?= strip_tags($res["fio"])  ?>"></td>
     <td><input name="email[]" type="email" class="form-control form-control-sm <?php if ($errors['email']) {print 'is-invalid';} ?>" id="email" placeholder="Введите почту" value="<?= strip_tags($res["email"]) ?>"></td>
     <td><input name="date[]" type="date" class="form-control form-control-sm <?php if ($errors['date']) {print 'is-invalid';} ?>" value="<?= strip_tags($res["date"]) ?>"></td>
     <td> <label for="g1"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'is-invalid';} ?>" name="sex<?= $counter ?>" id="g1" value="m" <?php if ($res["sex"]=="m") {print 'checked';} ?>>
