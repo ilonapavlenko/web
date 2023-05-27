@@ -8,7 +8,7 @@
 // Отправляем браузеру правильную кодировку,
 // файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
-include('megamodule.php');
+include('auth.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
