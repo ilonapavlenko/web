@@ -12,7 +12,7 @@ global $db;
 
 
 
-function update_application($db, $id, $data, $abilities) {
+function update_application2($db, $id, $data, $abilities) {
     $stmt = $db->prepare("UPDATE application2 SET fio = ?, email = ?, date = ?, sex = ?, limbs = ?, bio = ?, checkbox = ? WHERE id = ?");
     $stmt -> execute([$data['fio'], $data['email'], $data['date'], $data['sex'], $data['limbs'], $data['bio'], $data['checkbox'], $id]);
     
