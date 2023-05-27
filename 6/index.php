@@ -183,7 +183,7 @@ else {
             $stmt = $db->prepare("INSERT INTO application2 (fio,email,date,sex,limbs,bio,checkbox, user_id) VALUES
     (?,?,?,?,?,?,?,?)");
             $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $id]);
-            $stmt = $db->prepare("SELECT id FROM ability");
+            $stmt = $db->prepare("SELECT id FROM ability2");
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
  
