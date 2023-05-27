@@ -11,7 +11,7 @@
 header('Content-Type: text/html; charset=UTF-8');
 $user = 'u52854';
 $pass = '6516432';
-$db = new PDO('mysql:host=localhost;dbname=u52843', $user, $pass,
+$db = new PDO('mysql:host=localhost;dbname=u52854', $user, $pass,
     [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); 
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
