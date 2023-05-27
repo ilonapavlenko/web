@@ -159,7 +159,7 @@ else {
           
           $abilities = $_POST['abilities'];
           
-          update_application2($db, $id_of_app, $data, $abilities);
+          update_application($db, $id_of_app, $data, $abilities);
   }
   else {
     // Генерируем уникальный логин и пароль.
@@ -180,7 +180,7 @@ else {
           $stmt = $db->prepare("INSERT INTO user (user, pass) VALUES (?,?)");
           $stmt -> execute([$login, password_hash($pass, PASSWORD_DEFAULT)]);
           $id = $db->lastInsertId();
-            $stmt = $db->prepare("INSERT INTO application2 (name,email,date,sex,limbs,bio,checkbox, user_id) VALUES
+            $stmt = $db->prepare("INSERT INTO application2 (fio,email,date,sex,limbs,bio,checkbox, user_id) VALUES
     (?,?,?,?,?,?,?,?)");
             $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $id]);
             $id = $db->lastInsertId();
