@@ -39,6 +39,7 @@ else
     </form>
     </div>
 ';
+    ?>
         <form id="form" action="" method="POST">
             <div class="group">
                 <label for="name">Имя:
