@@ -1,172 +1,212 @@
 <?php
+/**
+ * Реализовать возможность входа с паролем и логином с использованием
+ * сессии для изменения отправленных данных в предыдущей задаче,
+ * пароль и логин генерируются автоматически при первоначальной отправке формы.
+ */
 
+// Отправляем браузеру правильную кодировку,
+// файл index.php должен быть в кодировке UTF-8 без BOM.
+header('Content-Type: text/html; charset=UTF-8');
 include('auth.php');
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    try {
-        $stmt = $db->prepare("SELECT application_id, fio, email, date, sex, limbs, bio FROM application");
-        $stmt->execute();
-        $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        print('Error : ' . $e->getMessage());
+  // Массив для временного хранения сообщений пользователю.
+  $messages = array();
+
+  // В суперглобальном массиве $_COOKIE PHP хранит все имена и значения куки текущего запроса.
+  // Выдаем сообщение об успешном сохранении.
+  if (!empty($_COOKIE['save'])) {
+    
+    // Удаляем куку, указывая время устаревания в прошлом.
+    setcookie('save', '', 100000);
+    setcookie('login', '', 100000);
+    setcookie('pass', '', 100000);
+    // Выводим сообщение пользователю.
+    $messages[] = 'Спасибо, результаты сохранены.';
+    // Если в куках есть пароль, то выводим сообщение.
+    if (!empty($_COOKIE['pass'])) {
+      $messages[] = sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
+        и паролем <strong>%s</strong> для изменения данных.',
+        strip_tags($_COOKIE['login']),
+        strip_tags($_COOKIE['pass']));
+    }
+ 
+  }
+
+  // Складываем признак ошибок в массив.
+  $errors = array();
+  $errors=err_declare();
+
+  $messages = msg_declare($messages, $errors);
+
+  // Складываем предыдущие значения полей в массив, если есть.
+  // При этом санитизуем все данные для безопасного отображения в браузере.
+  $values = array();
+  $values['fio'] = empty($_COOKIE['fio_value']) ? '' : strip_tags($_COOKIE['fio_value']);
+  $values['email'] = empty($_COOKIE['email_value']) ? '' : strip_tags($_COOKIE['email_value']);
+  $values['date'] = empty($_COOKIE['date_value']) ? '' :strip_tags($_COOKIE['date_value']);
+  $values['sex'] = empty($_COOKIE['sex_value']) ? '' : strip_tags($_COOKIE['sex_value']);
+  $values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : strip_tags($_COOKIE['limbs_value']);
+  $values['abilities'] = empty($_COOKIE['abilities_value']) ? array() : unserialize($_COOKIE['abilities_value']);
+  $values['bio'] = empty($_COOKIE['bio_value']) ? '' : strip_tags($_COOKIE['bio_value']);
+  $values['checkbox'] = empty($_COOKIE['checkbox_value']) ? '' : strip_tags($_COOKIE['checkbox_value']);
+
+  // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
+  // ранее в сессию записан факт успешного логина.
+  //todo fix_errors
+  if (count(array_filter($errors)) === 0 && !empty($_COOKIE[session_name()]) &&
+      session_start() && !empty($_SESSION['login'])) {
+
+
+        $stmt = $db->prepare("SELECT * FROM application2 where user_id=?");
+        $stmt -> execute([$_SESSION['uid']]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $values['fio'] = empty($result[0]['fio']) ? '' : strip_tags($result[0]['fio']);
+        $values['email'] = empty($result[0]['email']) ? '' : strip_tags($result[0]['email']);
+  $values['date'] = empty($result[0]['date']) ? '' :strip_tags($result[0]['date']);
+  $values['sex'] = empty($result[0]['sex']) ? '' : strip_tags($result[0]['sex']);
+  $values['limbs'] = empty($result[0]['limbs']) ? '' : strip_tags($result[0]['limbs']);
+ 
+  $values['bio'] = empty($result[0]['bio']) ? '' : strip_tags($result[0]['bio']);
+  $values['checkbox'] = empty($result[0]['checkbox']) ? '' : strip_tags($result[0]['checkbox']);
+  $values['limbs'] = empty($result[0]['limbs']) ? '' : strip_tags($result[0]['limbs']);
+
+  $stmt = $db->prepare("SELECT * FROM app_ability2 where id_app=(SELECT id FROM application2 where user_id=?) ");
+ 
+
+  $stmt -> execute([$_SESSION['uid']]);
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($result as $res) {
+    $values['abilities'][$res["id_ab"]-1] = empty($res) ? '' : strip_tags($res["id_ab"]);
+}
+  
+
+
+
+    // TODO: загрузить данные пользователя из БД
+    // и заполнить переменную $values,
+    // предварительно санитизовав.
+  printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+  }
+
+  // Включаем содержимое файла form.php.
+  // В нем будут доступны переменные $messages, $errors и $values для вывода 
+  // сообщений, полей с ранее заполненными данными и признаками ошибок.
+  include('form.php');
+}
+// Иначе, если запрос был методом POST, т.е. нужно проверить данные и сохранить их в XML-файл.
+else {
+    
+    if (isset($_POST['logout']) && $_POST['logout'] == 'true') {
+        session_destroy();
+        setcookie(session_name(), '', time() - 3600);
+        setcookie('PHPSESSID', '', time() - 3600, '/');
+       
+        header('Location: ./');
         exit();
     }
-    $messages = array();
-
-    $errors = array();
-    $errors['error_id'] = empty($_COOKIE['error_id']) ? '' : $_COOKIE['error_id'];
-    $errors['fio'] = !empty($_COOKIE['fio_error']);
-    $errors['email1'] = !empty($_COOKIE['email_error1']);
-    $errors['email2'] = !empty($_COOKIE['email_error2']);
-    $errors['date'] = !empty($_COOKIE['date_error']);
-    $errors['sex'] = !empty($_COOKIE['sex_error']);
-    $errors['limbs'] = !empty($_COOKIE['limbs_error']);
-    $errors['abilities1'] = !empty($_COOKIE['abilities_error']);
-    $errors['bio1'] = !empty($_COOKIE['bio_error1']);
-    $errors['bio2'] = !empty($_COOKIE['bio_error2']);
-  
-    if (!empty($errors['fio'])) {
-        setcookie('name_error', '', 100000);
-        $messages['fio'] = '<p class="msg">Заполните имя</p>';
-    }
-    if (!empty($errors['email1'])) {
-        setcookie('email_error1', '', 100000);
-        $messages['email1'] = '<p class="msg">Заполните email</p>';
-    } else if (!empty($errors['email2'])) {
-        setcookie('email_error2', '', 100000);
-        $messages['email2'] = '<p class="msg">Некорректно заполнено поле email</p>';
-    }
-    if (!empty($errors['date'])) {
-        setcookie('date_error', '', 100000);
-        $messages['date'] = '<p class="msg">Неправильный формат ввода года</p>';
-    }
-    if (!empty($errors['sex'])) {
-        setcookie('sex_error', '', 100000);
-        $messages['sex'] = '<p class="msg">Не выбран пол</p>';
-    }
-    if (!empty($errors['limbs'])) {
-        setcookie('limbs_error', '', 100000);
-        $messages['limbs'] = '<p class="msg">Не выбрана конечность</p>';
-    }
-    if (!empty($errors['abilities'])) {
-        setcookie('abilities_error', '', 100000);
-        $messages['abilities'] = '<p class="msg">Не выбрана ни одна сверхспособность</p>';
-    }
-    if (!empty($errors['bio1'])) {
-        setcookie('bio_error1', '', 100000);
-        $messages['bio1'] = '<p class="msg">Не заполнено поле биографии</p>';
-    } else if (!empty($errors['bio2'])) {
-        setcookie('bio_error2', '', 100000);
-        $messages['bio2'] = '<p class="msg">Недопустимый формат ввода биографии</p>';
-    }
-    $_SESSION['token'] = bin2hex(random_bytes(32));
-    $_SESSION['login'] = $validUser;
-    include('form.php');
+    
+  // Проверяем ошибки.
+    $data = [
+        'fio' => $_POST['fio'],
+        'email' => $_POST['email'],
+        'date' => $_POST['date'],
+        'sex' => $_POST['sex'],
+        'limbs' => $_POST['limbs'],
+        'bio' => $_POST['bio'],
+        'checkbox' => $_POST['checkbox']
+    ];
+    $abilities = $_POST['abilities'];
+    $errors=validateFormData($data, $abilities);
+  if ($errors) {
+    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
+    header('Location: index.php');
     exit();
-} else {
-    if (!empty($_POST['token']) && hash_equals($_POST['token'], $_SESSION['token'])) {
-    foreach ($_POST as $key => $value) {
-        if (preg_match('/^clear(\d+)$/', $key, $matches)) {
-            $app_id = $matches[1];
-            setcookie('clear', $app_id, time() + 24 * 60 * 60);
-            $stmt = $db->prepare("DELETE FROM application WHERE application_id = ?");
-            $stmt->execute([$app_id]);
-            $stmt = $db->prepare("DELETE FROM abilities WHERE application_id = ?");
-            $stmt->execute([$app_id]);
-            $stmt = $db->prepare("DELETE FROM users WHERE application_id = ?");
-            $stmt->execute([$app_id]);
-        }
-        if (preg_match('/^save(\d+)$/', $key, $matches)) {
-            $app_id = $matches[1];
-            $dates = array();
-            $dates['fio'] = $_POST['fio' . $app_id];
-            $dates['email'] = $_POST['email' . $app_id];
-            $dates['date'] = $_POST['date' . $app_id];
-            $dates['sex'] = $_POST['sex' . $app_id];
-            $dates['limbs'] = $_POST['limbs' . $app_id];
-            $abilities = $_POST['abilities' . $app_id];
-            $filtred_abilities = array_filter($abilities, function($value) {return($value == 1 || $value == 2 || $value == 3);});
-            $dates['bio'] = $_POST['bio' . $app_id];
-        
-            $fio = $dates['fio'];
-            $email = $dates['email'];
-            $date = $dates['date'];
-            $sex = $dates['sex'];
-            $limbs = $dates['limbs'];
-            $bio = $dates['bio'];
-        
-            if (empty($fio)) {
-                setcookie('fio_error', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            }
-            if (empty($email)) {
-                setcookie('email_error1', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                setcookie('email_error2', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } 
-            if (!is_numeric($date)) {
-                setcookie('date_error', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } 
-            if (empty($sex)) {
-                setcookie('sex_error', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } 
-            if (empty($limbs)) {
-                setcookie('limbs_error', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } 
-            if (empty($abilities)) {
-                setcookie('abilities_error', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-              } 
-            if (empty($bio)) {
-                setcookie('bio_error1', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } else if (!preg_match('/^[\p{Cyrillic}\d\s,.!?-]+$/u', $bio)) {
-                setcookie('bio_error2', '1', time() + 24 * 60 * 60);
-                $errors = TRUE;
-            } 
-        
-            if ($errors) {
-                setcookie('error_id', $app_id, time() + 24 * 60 * 60);
-                header('Location: index.php');
-                exit();
-            } else {
-                setcookie('fio_error', '', 100000);
-                setcookie('email_error1', '', 100000);
-                setcookie('email_error2', '', 100000);
-                setcookie('date_error', '', 100000);
-                setcookie('sex_error', '', 100000);
-                setcookie('limbs_error', '', 100000);
-                setcookie('abilities_error', '', 100000);
-                setcookie('bio_error1', '', 100000);
-                setcookie('bio_error2', '', 100000);
-                setcookie('error_id', '', 100000);
-            }
-            $stmt = $db->prepare("SELECT fio, email, date, sex, limbs, bio FROM application WHERE application_id = ?");
-            $stmt->execute([$app_id]);
-            $old_dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+  else {
+    // Удаляем Cookies с признаками ошибок.
+    setcookie('fio_error', '', 100000);
+    setcookie('email_error', '', 100000);
+    setcookie('date_error', '', 100000);
+    setcookie('sex_error', '', 100000);
+    setcookie('limbs_error', '', 100000);
+    setcookie('abilities_error', '', 100000);
+    setcookie('bio_error', '', 100000);
+    setcookie('checkbox_error', '', 100000);
+  }
 
-            $stmt = $db->prepare("SELECT superpower_id FROM abilities WHERE application_id = ?");
-            $stmt->execute([$app_id]);
-            $old_abilities = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            if (array_diff($dates, $old_dates[0])) {
-                $stmt = $db->prepare("UPDATE application SET fio = ?, email = ?, date = ?, sex = ?, limbs = ?, bio = ? WHERE application_id = ?");
-                $stmt->execute([$dates['fio'], $dates['email'], $dates['date'], $dates['sex'], $dates['limbs'], $dates['bio'], $app_id]);
-            }
-            if (array_diff($abilities, $old_abilities) || count($abilities) != count($old_abilities)) {
-                $stmt = $db->prepare("DELETE FROM abilities WHERE application_id = ?");
-                $stmt->execute([$app_id]);
-                $stmt = $db->prepare("INSERT INTO abilities (application_id, superpower_id) VALUES (?, ?)");
-                foreach ($abilities as $superpower_id) {
-                    $stmt->execute([$app_id, $superpower_id]);
+  // Проверяем меняются ли ранее сохраненные данные или отправляются новые.
+  if (!empty($_COOKIE[session_name()]) &&
+      session_start() && !empty($_SESSION['login'])) {
+          $stmt = $db->prepare("SELECT id FROM application2 WHERE user_id = ?");
+          $stmt -> execute([$_SESSION['uid']]);
+          $result3 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          $id_of_app = $result3[0]["id"];
+          
+          $data = [
+              'fio' => $_POST['fio'],
+              'email' => $_POST['email'],
+              'date' => $_POST['date'],
+              'sex' => $_POST['sex'],
+              'limbs' => $_POST['limbs'],
+              'bio' => $_POST['bio'],
+              'checkbox' => $_POST['checkbox']
+          ];
+          
+          $abilities = $_POST['abilities'];
+          
+          update_application($db, $id_of_app, $data, $abilities);
+  }
+  else {
+    // Генерируем уникальный логин и пароль.
+    // TODO: сделать механизм генерации, например функциями rand(), uniqid(), md5(), substr().
+    $login = substr(uniqid('', true), -8, 8);
+    $pass = uniqid();
+    // Сохраняем в Cookies.
+    setcookie('login', $login);
+    setcookie('pass', $pass);
+
+    // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
+    // ...
+
+
+        
+        // Подготовленный запрос. Не именованные метки.
+        try {
+          $stmt = $db->prepare("INSERT INTO user (user, pass) VALUES (?,?)");
+          $stmt -> execute([$login, password_hash($pass, PASSWORD_DEFAULT)]);
+          $id = $db->lastInsertId();
+            $stmt = $db->prepare("INSERT INTO application2 (fio,email,date,sex,limbs,bio,checkbox, user_id) VALUES
+    (?,?,?,?,?,?,?,?)");
+            $stmt -> execute([$_POST['fio'], $_POST['email'], $_POST['date'], $_POST['sex'], $_POST['limbs'], $_POST['bio'], $_POST['checkbox'], $id]);
+            $stmt = $db->prepare("SELECT id FROM ability");
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
+            $stmt = $db->prepare("INSERT INTO app_ability2 (id_app, id_ab) VALUES (?,?)");
+            foreach($res as $r){
+                if(isset($_POST['abilities'][$r["id"]-1])){
+                    $stmt->execute([$id, $r["id"]]);
                 }
             }
+            
+            
+            
         }
-    }
-    header('Location: index.php');
-    }
+        catch(PDOException $e){
+            print('Error : ' . $e->getMessage());
+            exit();
+        }
+
+  }
+
+  // Сохраняем куку с признаком успешного сохранения.
+  setcookie('save', '1');
+
+  // Делаем перенаправление.
+  header('Location: ./');
 }
