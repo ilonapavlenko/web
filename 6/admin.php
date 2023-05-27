@@ -234,28 +234,28 @@ $errors=err_declare($counter);
   <tr>
     <td><?= $res["id"] ?></td>
     <input name="id[]" class="form-control form-control-sm" value="<?= strip_tags($res["id"]) ?>" type="hidden">
-    <td><input name="fio[]" class="form-control form-control-sm <?php if ($errors['fio']) {print 'error';} ?>" placeholder="Введите имя" value="<?= strip_tags($res["fio"])  ?>"></td>
-    <td><input name="email[]" type="email" class="form-control form-control-sm <?php if ($errors['email']) {print 'error';} ?>" id="email" placeholder="Введите почту" value="<?= strip_tags($res["email"]) ?>"></td>
-    <td><input name="date[]" type="date" class="form-control form-control-sm <?php if ($errors['date']) {print 'error';} ?>" value="<?= strip_tags($res["date"]) ?>"></td>
-    <td> <label for="g1"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex<?= $counter ?>" id="g1" value="m" <?php if ($res["sex"]=="m") {print 'checked';} ?>>
+    <td><input name="fio[]" class="form-control form-control-sm <?php if ($errors['fio']) {print 'is-invalid';} ?>" placeholder="Введите имя" value="<?= strip_tags($res["name"])  ?>"></td>
+    <td><input name="email[]" type="email" class="form-control form-control-sm <?php if ($errors['email']) {print 'is-invalid';} ?>" id="email" placeholder="Введите почту" value="<?= strip_tags($res["email"]) ?>"></td>
+    <td><input name="date[]" type="date" class="form-control form-control-sm <?php if ($errors['date']) {print 'is-invalid';} ?>" value="<?= strip_tags($res["date"]) ?>"></td>
+    <td> <label for="g1"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'is-invalid';} ?>" name="sex<?= $counter ?>" id="g1" value="m" <?php if ($res["sex"]=="m") {print 'checked';} ?>>
                     М</label> 
-                     <label for="g2"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'error';} ?>" name="sex<?= $counter ?>" id="g2" value="w" <?php if ($res["sex"]=="w") {print 'checked';} ?>>
+                     <label for="g2"><input type="radio" class="form-check-input <?php if ($errors['sex']) {print 'is-invalid';} ?>" name="sex<?= $counter ?>" id="g2" value="w" <?php if ($res["sex"]=="w") {print 'checked';} ?>>
                     Ж</label></td>
                     
-    <td> <label for="l1"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs<?= $counter ?>" id="l1" value="1" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
+    <td> <label for="l1"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l1" value="1" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
                     1</label> 
-	    <label for="l2"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs<?= $counter ?>" id="l2" value="2" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
+                    <label for="l2"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l2" value="2" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
                     2</label> 
-	    <label for="l3"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs<?= $counter ?>" id="l3" value="3" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
+                    <label for="l3"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l3" value="3" <?php if ($res["limbs"]=="2") {print 'checked';} ?>>
                     3</label> 
-                     <label for="l4"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'error';} ?>" name="limbs<?= $counter ?>" id="l4" value="4" <?php if ($res["limbs"]=="4") {print 'checked';} ?>>
+                     <label for="l4"><input type="radio" class="form-check-input <?php if ($errors['limbs']) {print 'is-invalid';} ?>" name="limbs<?= $counter ?>" id="l4" value="4" <?php if ($res["limbs"]=="4") {print 'checked';} ?>>
                     4</label></td>
 <?php     $stmt = $db->prepare("SELECT * FROM app_ability2 where id_app=?");
 $stmt -> execute([$res["id"]]);
 $result2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
-    <td> <select class="form-control form-control-sm <?php if ($errors['abilities']) {print 'error';} ?>" name="abilities<?= $counter ?>[]" id="mltplslct" multiple="multiple">
+    <td> <select class="form-control form-control-sm <?php if ($errors['abilities']) {print 'is-invalid';} ?>" name="abilities<?= $counter ?>[]" id="mltplslct" multiple="multiple">
                     <option value="1" <?php if(!empty($result2)) {if ($result2[0]['id_ab']=='1') {print 'selected';}} ?>>бессмертие</option>
                     <option value="2" <?php if(!empty($result2)) {if ((isset($result2[0]['id_ab']) && $result2[0]['id_ab'] == '2') ||
     (isset($result2[1]['id_ab']) && $result2[1]['id_ab'] == '2')) {print 'selected';}} ?>>прохождение сквозь стены</option>
@@ -263,8 +263,8 @@ $result2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
     (isset($result2[1]['id_ab']) && $result2[1]['id_ab'] == '3') ||
     (isset($result2[2]['id_ab']) && $result2[2]['id_ab'] == '3')) {print 'selected';}} ?>>левитация</option>
                 </select></td>
-    <td><textarea  name="bio[]" rows="3" class="form-control form-control-sm <?php if ($errors['bio']) {print 'error';} ?>"><?= strip_tags($res["bio"]) ?></textarea></td>
-    <td><input name="checkbox<?= $counter ?>" type="checkbox" class="form-check-input <?php if ($errors['checkbox']) {print 'error';} ?>" value="1" <?php if ($res["checkbox"]=="1") {print 'checked';} ?>></td>
+    <td><textarea  name="bio[]" rows="3" class="form-control form-control-sm <?php if ($errors['bio']) {print 'is-invalid';} ?>"><?= strip_tags($res["bio"]) ?></textarea></td>
+    <td><input name="checkbox<?= $counter ?>" type="checkbox" class="form-check-input <?php if ($errors['checkbox']) {print 'is-invalid';} ?>" value="1" <?php if ($res["checkbox"]=="1") {print 'checked';} ?>></td>
     <td><?= $res["user_id"] ?></td>
     <td><input type="checkbox" name="row[]" value="<?= $counter ?>"></td>
     <?php $counter++ ?>
