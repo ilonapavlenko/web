@@ -98,7 +98,7 @@ function validateFormData($data, $abilities ,$row=null) {
         setcookie('limbs_error'.$row, '1', time() + 24 * 60 * 60);
         $errors = true;
     } else {
-        if (!in_array($data['limbs'], [2, 4])) {
+        if (!in_array($data['limbs'], [1,2,3, 4])) {
             setcookie('limbs_error'.$row, '1', time() + 24 * 60 * 60);
             $errors = true;
         }
