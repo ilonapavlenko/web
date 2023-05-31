@@ -14,7 +14,7 @@
     <header>
         <div class="header-items">
             <a href="#" class="logo">
-                <img src="C:\Users\ilona\Downloads\logo.png" alt="logo" width="100" height="80">
+                <img src="logo.png" alt="logo" width="100" height="80">
                 <h1>Холдинг&nbsp;&nbsp;</h1>
             </a>
             
