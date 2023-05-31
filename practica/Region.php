@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     $new = array();
     $new['name'] = empty($_COOKIE['name']) ? '' : $_COOKIE['name'];
-    include('Region/main.php');
+    include('assets/Region.php');
 } else {
     $errors = array();
     $messages = array();
