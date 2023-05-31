@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta fio="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="styles/index.css">
     <link type="image/x-icon" href="logo.png" rel="shortcut icon">
     <link type="Image/x-icon" href="logo.png" rel="icon">
     <title>Holding</title>
