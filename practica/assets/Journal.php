@@ -16,7 +16,7 @@
         <div class="header-items">
             <a href="index.php" class="logo">
                 <img src="logo.png" alt="logo" width="100" height="80">
-                <h1>Холдинг</h1>
+                <h1>Журнал учета отчетных данных</h1>
             </a>
             <nav>
                 <ul>
@@ -50,9 +50,7 @@
             }
         ?>
         <form action="" method="POST">
-            <div class="main-content">
-                <h2>Журнал учета отчетных данных</h2>
-            </div>
+            
             <div class="main-content">
                 <div class="top-table">
                     <div class="newdates">
