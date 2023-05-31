@@ -11,7 +11,8 @@ CREATE TABLE Company (
 CREATE TABLE Indicators (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name TEXT NOT NULL,
-    revenue INTEGER NOT NULL
+    revenue INTEGER NOT NULL,
+    city TEXT NOT NULL
 );
 
 CREATE TABLE Journal (
