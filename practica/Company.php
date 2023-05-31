@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         else {
             $name = $_POST['name'];
             $stmt = $db->prepare("INSERT INTO Company (name) VALUES (?)");
-            $stmt->execute([$name, $city]);
+            $stmt->execute([$name]);
             $messages['added'] = 'Предприятие "'.$name.'" успешно добавлено';
             setcookie('name', '', time() + 24 * 60 * 60);
         }
