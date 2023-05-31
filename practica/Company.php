@@ -19,18 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages = array();
     if (!empty($_POST['addnewdate'])) {
         if (empty($_POST['name'])) {
-            $errors['name1'] = 'Заполните поле "Название компании"';
+            $errors['name1'] = 'Заполните поле "Название предприятия"';
             setcookie('name', '', time() + 24 * 60 * 60);
         } else if (!preg_match('/^[\p{L}\p{M}\s.]+$/u', $_POST['name'])) {
-            $errors['name2'] = 'Некорректно заполнено поле "Название компании"';
+            $errors['name2'] = 'Некорректно заполнено поле "Название предприятия"';
             setcookie('name', $_POST['name'], time() + 24 * 60 * 60);
         } 
         
-        if (empty($errors)) {
+        else {
             $name = $_POST['name'];
             $stmt = $db->prepare("INSERT INTO Company (name) VALUES (?)");
             $stmt->execute([$name, $city]);
-            $messages['added'] = 'Компания "'.$name.'" успешно добавлена';
+            $messages['added'] = 'Предприятие "'.$name.'" успешно добавлено';
             setcookie('name', '', time() + 24 * 60 * 60);
         }
     } 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             } else {
                 $stmt = $db->prepare("DELETE FROM Company WHERE id = ?");
                 $stmt->execute([$id]);
-                $messages['deleted'] = 'Компания с <b>id = '.$id.'</b> успешно удалена';
+                $messages['deleted'] = 'Предприятие с <b>id = '.$id.'</b> успешно удалено';
             }
         }
         if (preg_match('/^edit(\d+)_x$/', $key, $matches)) {
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if (array_diff_assoc($dates, $old_dates[0])) {
                 $stmt = $db->prepare("UPDATE Company SET name = ? WHERE id = ?");
                 $stmt->execute([$dates['name'],  $id]);
-                $messages['edited'] = 'Компания с <b>id = '.$id.'</b> успешно обновлена';
+                $messages['edited'] = 'Предприятие с <b>id = '.$id.'</b> успешно обновлена';
             }
         }
     }
