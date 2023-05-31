@@ -71,9 +71,7 @@
             }
         ?>
         <form action="" method="POST">
-            <div class="main-content">
-                <h2>Список показателей</h2>
-            </div>
+            
             <div class="main-content">
                 <div class="top-table">
                     <div class="newdates">
