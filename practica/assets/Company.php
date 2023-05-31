@@ -55,12 +55,11 @@
             <div class="main-content">
                 <div class="newdates">
                     <div class="newdates-item">
-                        <label for="name">Название предприятия:</label>
+                        <label for="name">Предприятие:</label>
                     </div>
                     <div class="newdates-item">
-                        <input name="name" value="<?php print($new['name']); ?>" placeholder="название">
+                        <input name="name" value="<?php print($new['name']); ?>" placeholder="Название предприятия">
                     </div>
-                    
                     <div class="newdates-item">
                         <input type="submit" name="addnewdate" value="Добавить">
                     </div>
@@ -72,7 +71,6 @@
                             <tr>
                                 <th>id</th>
                                 <th>Название предприятия</th>
-                                
                                 <th colspan=2>&nbsp;</th>
                             <tr>';
                 foreach ($values as $value) {
