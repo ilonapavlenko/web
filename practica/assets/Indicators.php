@@ -179,11 +179,11 @@
                                 </td>';
                     echo        '<td>
                                     <input'; if(empty($_COOKIE['edit']) || ($_COOKIE['edit'] != $value['id'])) print(" disabled ");
-                                    else print(" "); echo 'name="city'.$value['id'].'" value="'.$value['city'].'">
+                                    else print(" "); echo 'name="revenue'.$value['id'].'" value="'.$value['revenue'].'">
                                 </td>';
                     echo        '<td>
                                     <input'; if(empty($_COOKIE['edit']) || ($_COOKIE['edit'] != $value['id'])) print(" disabled ");
-                                    else print(" "); echo 'name="revenue'.$value['id'].'" value="'.$value['revenue'].'">
+                                    else print(" "); echo 'name="city'.$value['id'].'" value="'.$value['city'].'">
                                 </td>';
                 if (empty($_COOKIE['edit']) || ($_COOKIE['edit'] != $value['id'])) {
                     echo        '<td> <input name="edit'.$value['id'].'" type="image" src="https://static.thenounproject.com/png/2185844-200.png" width="20" height="20" alt="submit"/> </td>';
