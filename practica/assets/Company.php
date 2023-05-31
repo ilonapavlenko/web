@@ -49,9 +49,7 @@
             }
         ?>
         <form action="" method="POST">
-            <div class="main-content">
-                <h2>Список предприятий</h2>
-            </div>
+           
             <div class="main-content">
                 <div class="newdates">
                     <div class="newdates-item">
