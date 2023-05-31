@@ -119,9 +119,7 @@
                                 <th>Предприятие</th>
                                 <th>Дата проведения</th>
                                 <th colspan=2>
-                                    <button type="button" onclick="toggleFilter()">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/107/107799.png" alt="filters" width="20" height="20">
-                                    </button>
+                                    
                                 </th>
                             <tr>';
                 foreach ($values as $value) {
