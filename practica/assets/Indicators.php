@@ -166,7 +166,7 @@
                                 <th>Прибыль</th>
                                 <th colspan=2>
                                     <button type="button" onclick="toggleFilter()">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/107/107799.png" alt="filters" width="20" height="20">
+                                        <img src="filter.png" alt="filters" width="20" height="20">
                                     </button>
                                 </th>
                             <tr>';
@@ -186,10 +186,10 @@
                                     else print(" "); echo 'name="city'.$value['id'].'" value="'.$value['city'].'">
                                 </td>';
                 if (empty($_COOKIE['edit']) || ($_COOKIE['edit'] != $value['id'])) {
-                    echo        '<td> <input name="edit'.$value['id'].'" type="image" src="https://static.thenounproject.com/png/2185844-200.png" width="20" height="20" alt="submit"/> </td>';
-                    echo        '<td> <input name="clear'.$value['id'].'" type="image" src="https://cdn-icons-png.flaticon.com/512/860/860829.png" width="20" height="20" alt="submit"/> </td>';
+                    echo        '<td> <input name="edit'.$value['id'].'" type="image" src="edit.png" width="20" height="20" alt="submit"/> </td>';
+                    echo        '<td> <input name="clear'.$value['id'].'" type="image" src="clear.png" width="20" height="20" alt="submit"/> </td>';
                 } else {
-                    echo        '<td colspan=2> <input name="save'.$value['id'].'" type="image" src="https://cdn-icons-png.flaticon.com/512/84/84138.png" width="20" height="20" alt="submit"/> </td>';
+                    echo        '<td colspan=2> <input name="save'.$value['id'].'" type="image" src="save.png" width="20" height="20" alt="submit"/> </td>';
                 }
                     echo    '</tr>';
                 }
