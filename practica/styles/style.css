@@ -77,7 +77,6 @@ main {
 table {
     border-collapse: collapse; 
     text-align: center;
-    margin-left: 30%;
 }
 
 td, th {
