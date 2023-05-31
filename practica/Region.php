@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $dates['name'] = $_POST['name' . $id];
 
-            if (array_diff($dates, $old_dates[0])) {
+            if (array_diff_assoc($dates, $old_dates[0])) {
                 $stmt = $db->prepare("UPDATE Region SET name = ? WHERE id = ?");
                 $stmt->execute([$dates['name'], $id]);
                 $messages['edited'] = 'Регион с <b>id = '.$id.'</b> успешно обновлён';
