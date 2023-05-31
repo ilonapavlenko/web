@@ -4,7 +4,7 @@ include('dbconnect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
-        $stmt = $db->prepare("SELECT id, RegionID, CompanyId, date FROM Performances");
+        $stmt = $db->prepare("SELECT id, RegionID, CompanyId, date FROM Journal");
             $stmt->execute();
             $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
