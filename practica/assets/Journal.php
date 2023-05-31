@@ -98,7 +98,7 @@
                         </div>
                         
                         <div class="newdates-item">
-                            <label for="date">Дата проведения</label>
+                            <label for="date">Дата подписания журнала</label>
                         </div>
                         <div class="newdates-item">
                             <input type="date" name="date" value=<?php print($new['date']); ?>>
