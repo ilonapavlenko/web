@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if (empty($_POST['name'])) {
             $errors['name1'] = 'Заполните поле "Название региона"';
             setcookie('name', '', time() + 24 * 60 * 60);
-        } else if (!preg_match('/^[\p{L}\p{N}]+$/u', $_POST['name'])) {
+        } else if (!preg_match('/^[\p{L}\p{M}\s.]+$/u', $_POST['name'])) {
             $errors['name2'] = 'Некорректно заполнено поле "Название региона"';
             setcookie('name', $_POST['name'], time() + 24 * 60 * 60);
         } else {
