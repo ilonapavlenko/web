@@ -37,7 +37,7 @@
         <div class="header-items">
             <a href="index.php" class="logo">
                 <img src="logo.png" alt="logo" width="100" height="80">
-                <h1>Холдинг</h1>
+                <h1>Список показателей</h1>
             </a>
             <nav>
                 <ul>
