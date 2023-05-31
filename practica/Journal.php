@@ -83,3 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
         }
     }
+    
+    if (!empty($messages)) {
+        setcookie('messages', serialize($messages), time() + 24 * 60 * 60);
+    }
+    if (!empty($errors)) {
+        setcookie('errors', serialize($errors), time() + 24 * 60 * 60);
+    }
+    header('Location: Journal.php');
+}
