@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     foreach ($_POST as $key => $value) {
         if (preg_match('/^clear(\d+)_x$/', $key, $matches)) {
             $id = $matches[1]; 
-            $stmt = $db->prepare("(SELECT id FROM Journal WHERE RegionId = ?)");
+            $stmt = $db->prepare("SELECT id FROM Journal WHERE RegionId = ?");
             $stmt->execute([$id, $id]);
             $empty = $stmt->rowCount() === 0;
             if (!$empty) {
