@@ -15,7 +15,7 @@
         <div class="header-items">
             <a href="index.php" class="logo">
                 <img src="logo.png" alt="logo" width="100" height="80">
-                <h1>Список предприятийг</h1>
+                <h1>Список предприятий</h1>
             </a>
             <nav>
                 <ul>
