@@ -1,0 +1,26 @@
+CREATE TABLE Region (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Company (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    city TEXT NOT NULL
+);
+
+CREATE TABLE Indicators (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name TEXT NOT NULL,
+    revenue INTEGER NOT NULL
+);
+
+CREATE TABLE Journal (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    RegionID INTEGER NOT NULL,
+    CompanyId INTEGER NOT NULL,
+    date DATE NOT NULL,
+    FOREIGN KEY (RegionID) REFERENCES Region (id),
+    FOREIGN KEY (CompanyId) REFERENCES Company (id)
+    
+);
