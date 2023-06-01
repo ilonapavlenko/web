@@ -1,13 +1,13 @@
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  
 }
 
 header {
   background-color: rgb(176, 139, 135);
-  color: black;
+  color:  #fff;
   padding: 20px;
   height: 100px;
 }
@@ -19,7 +19,7 @@ header {
 
 header h1 a, header h1 a:active {
   text-decoration: none;
-  color: black;
+  color:  black;
 }
 
 h1 {
